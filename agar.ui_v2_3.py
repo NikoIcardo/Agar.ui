@@ -87,9 +87,9 @@ for i in range(10):
     
 
 #character vars
-x = 100;
-y = 100;
-r = 10;
+x = 100
+y = 100
+r = 10
 area = 3.14 * r ** 2
 
 # Game State
@@ -148,10 +148,11 @@ while Alive:
     for i in range(0, len(enemyList)):
         if enemyList[i].x <= x + r and enemyList[i].x >= x - r:
             if enemyList[i].y <= y + r and enemyList[i].y >= y - r:
-                area += 3.14 * enemyList[i].r ** 2
-                r = math.sqrt(area/(3.14))
-                enemyList[i] = enemies()
-        
+                if area > 3.14 * enemyList[i].r ** 2:
+                    area += 3.14 * enemyList[i].r ** 2
+                    r = math.sqrt(area/(3.14))
+                    enemyList[i] = enemies()
+
         enemyList[i].x += ((-1)**random.randint(0,1))*enemyList[i].movement
         enemyList[i].y += ((-1)**random.randint(0,1))*enemyList[i].movement
 
@@ -168,16 +169,16 @@ while Alive:
         
 
     if keyboard.is_pressed('a'):
-        x -= movementSpeed ;
+        x -= movementSpeed 
         
     if keyboard.is_pressed('d'):
-        x += movementSpeed ;
+        x += movementSpeed 
         
     if keyboard.is_pressed('s'):
-        y += movementSpeed ;
+        y += movementSpeed 
         
     if keyboard.is_pressed('w'):
-        y -= movementSpeed ;
+        y -= movementSpeed 
         
 
     UpdateScreen()
