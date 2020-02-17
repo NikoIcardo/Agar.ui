@@ -3,7 +3,7 @@ import keyboard
 import time
 import random
 import math
-
+#fuck you
 
 BoardSizeX = 1920
 BoardSizeY = 1080
