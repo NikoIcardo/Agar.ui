@@ -150,7 +150,7 @@ while Alive:
                 area += 3.14 * enemyList[i].r ** 2
                 r = math.sqrt(area/(3.14))
                 enemyList[i] = enemies()
->>>>>>> 968e97c93ac48e9e97d0d13a947e6b2f160e5ccf
+
 
         enemyList[i].x += ((-1)**random.randint(0,1))*enemyList[i].movement
         enemyList[i].y += ((-1)**random.randint(0,1))*enemyList[i].movement
