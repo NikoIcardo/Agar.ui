@@ -160,15 +160,14 @@ ScreenCenterY = BoardSizeY
 
 
 #Focus on Main Character
-MainScreen.configure(xscrollincrement = c.movementSpeed)
-MainScreen.configure(yscrollincrement = c.movementSpeed)
+
 
 def UpdateCamera(xMove, yMove): 
-    #MainScreen.xview = c.x
-    #MainScreen.yview = c.y 
+    MainScreen.configure(xscrollincrement = c.movementSpeed)
+    MainScreen.configure(yscrollincrement = c.movementSpeed)
     MainScreen.xview_scroll(xMove, "units")
     MainScreen.yview_scroll(yMove, "units")
-    print(MainScreen.yview)
+    
     
 
  
