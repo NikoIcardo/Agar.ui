@@ -13,6 +13,7 @@ BoardSizeY = 1080
 # Added a better enemy movement system. - added enemies variable movecounter and move direction. modified movement handling in the main while loop. 
 # moved movement speed into character and enemies classes for individual movement speed based off of object radius. 
 # updated screen movement to more accurately match character movement 
+# fixed enemy, bit, and character collisions to be circular rather than square. 
 
 
 
@@ -74,13 +75,7 @@ class character:
         self.movementSpeed = 100/r + r*.01
 
 
-
-
-        
-
 ################################################################################################################
-
-
 
 #Miscellanious Variables
 
@@ -97,7 +92,7 @@ def _create_circle(self, x, y, r, **kwargs):
 
 MainScreen.create_circle =  _create_circle
 
-master.wm_title("Agar.iu")
+master.wm_title("Agar.ui")
 
 bit = bits()
 
@@ -116,8 +111,6 @@ for i in range(10):
 
 # Game State
 Alive = True
-
-
 
 
 ################################################################################################################
@@ -169,30 +162,27 @@ def UpdateCamera(xMove, yMove):
     MainScreen.yview_scroll(yMove, "units")
     
     
-
- 
-
 ################################################################################################################
-
 
 #Main Loop
 while Alive:
 
+
+    
+
     #Character eat bit
     for i in range(0, len(bitList)):
-        if bitList[i].x <= c.x + c.r and bitList[i].x >= c.x - c.r:
-            if bitList[i].y <= c.y + c.r and bitList[i].y >= c.y - c.r:
-                bitList[i] = bits()
-                c.r += .07
-                c.area = 3.14 * c.r ** 2
-                c.update_movementSpeed(c.r)
+        if math.sqrt((bitList[i].x - c.x) ** 2 + (bitList[i].y - c.y) ** 2) < c.r:
+            bitList[i] = bits()
+            c.r += .07
+            c.area = 3.14 * c.r ** 2
+            c.update_movementSpeed(c.r)
     
 
     #Update Enemy (Is character over enemy? Is enemy over Character? Death Occurs Here. Enemy Movement. Enemy Eats Bits. )
     #character overlap 
     for i in range(0, len(enemyList)):
-        if enemyList[i].x <= c.x + c.r and enemyList[i].x >= c.x - c.r:
-            if enemyList[i].y <= c.y + c.r and enemyList[i].y >= c.y - c.r:
+        if math.sqrt((enemyList[i].x - c.x) ** 2 + (enemyList[i].y - c.y) ** 2) < c.r or math.sqrt((enemyList[i].x - c.x) ** 2 + (enemyList[i].y - c.y) ** 2) < enemyList[i].r :
                 if c.area > 3.14 * enemyList[i].r ** 2:
                     c.area += 3.14 * enemyList[i].r ** 2
                     c.r = math.sqrt(c.area/(3.14))
@@ -202,7 +192,7 @@ while Alive:
                     Alive = FALSE 
 
         #enemy movement
-        if(enemyList[i].moveCounter % 4 == 0):
+        if enemyList[i].moveCounter % 4 == 0:
             enemyList[i].moveDirection[0] = ((-1)**random.randint(0,1))
             enemyList[i].moveDirection[1] = ((-1)**random.randint(0,1))
 
@@ -213,12 +203,11 @@ while Alive:
         #enemy eats bits
         for j in range(0, len(bitList)):
             e = enemyList[i]
-            if bitList[j].x <= e.x + e.r and bitList[j].x >= e.x - e.r:
-                if bitList[j].y <= e.y + e.r and bitList[j].y >= e.y - e.r:
-                    bitList[j] = bits()
-                    e.area += 3.14 * bitList[j].r ** 2
-                    e.r = math.sqrt(e.area/3.14)
-                    e.update_movementSpeed(e.r)
+            if math.sqrt((bitList[j].x - e.x) ** 2 + (bitList[j].y - e.y) ** 2) < e.r:
+                e.area += 3.14 * bitList[j].r ** 2
+                e.r = math.sqrt(e.area/3.14)
+                e.update_movementSpeed(e.r)
+                bitList[j] = bits()
   
     #movement
 
