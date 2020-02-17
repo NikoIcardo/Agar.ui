@@ -149,7 +149,7 @@ def UpdateScreen():
 def DeathScreen():
     img = Image.open(r"C:\Users\Niko\Pictures\hqdefault.jpg") 
     MainScreen.image = ImageTk.PhotoImage(img)    
-    MainScreen.create_image(0, 0, image=MainScreen.image, anchor='nw')  
+    MainScreen.create_image(c.x, c.y, image=MainScreen.image, anchor='nw')  
     MainScreen.mainloop()
 
 
@@ -164,11 +164,11 @@ MainScreen.configure(xscrollincrement = c.movementSpeed)
 MainScreen.configure(yscrollincrement = c.movementSpeed)
 
 def UpdateCamera(xMove, yMove): 
-
     #MainScreen.xview = c.x
     #MainScreen.yview = c.y 
     MainScreen.xview_scroll(xMove, "units")
     MainScreen.yview_scroll(yMove, "units")
+    print(MainScreen.yview)
     
 
  
