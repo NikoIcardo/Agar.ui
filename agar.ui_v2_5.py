@@ -55,11 +55,11 @@ class enemies:
         self.r = 10
         self.area = 3.14 * self.r ** 2
         self.moveCounter = 0
-        self.movementSpeed = 2 #100/self.r + self.r*.01
+        self.movementSpeed = 100/self.r + self.r*.01
         self.moveDirection = [0,0]
 
     def update_movementSpeed(self, r): 
-        self.movementSpeed = 2 #100/r + r*.01
+        self.movementSpeed = 100/r + r*.01
 
 class character: 
     def __init__(self): 
@@ -164,6 +164,9 @@ MainScreen.configure(xscrollincrement = c.movementSpeed)
 MainScreen.configure(yscrollincrement = c.movementSpeed)
 
 def UpdateCamera(xMove, yMove): 
+
+    #MainScreen.xview = c.x
+    #MainScreen.yview = c.y 
     MainScreen.xview_scroll(xMove, "units")
     MainScreen.yview_scroll(yMove, "units")
     
@@ -200,9 +203,9 @@ while Alive:
                     Alive = FALSE 
 
         #enemy movement
-        if(enemyList[i].moveCounter % 2 == 0):
-            enemyList[i].moveDirection[0] += ((-1)**random.randint(0,1))
-            enemyList[i].moveDirection[1] += ((-1)**random.randint(0,1))
+        if(enemyList[i].moveCounter % 4 == 0):
+            enemyList[i].moveDirection[0] = ((-1)**random.randint(0,1))
+            enemyList[i].moveDirection[1] = ((-1)**random.randint(0,1))
 
         enemyList[i].moveCounter += 1
         enemyList[i].x += enemyList[i].moveDirection[0] * enemyList[i].movementSpeed
