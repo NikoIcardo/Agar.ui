@@ -147,7 +147,7 @@ def UpdateScreen():
     time.sleep(.001)
 
 def DeathScreen():
-    img = Image.open(r"C:\Users\Niko\Pictures\hqdefault.jpg") 
+    img = Image.open(r"hqdefault.jpg") 
     MainScreen.image = ImageTk.PhotoImage(img)    
     MainScreen.create_image(c.x, c.y, image=MainScreen.image, anchor='nw')  
     MainScreen.mainloop()
