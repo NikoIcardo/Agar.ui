@@ -22,7 +22,7 @@ class bits:
         ge="#"
         color=ge+de+re+we
         ###
-        
+
         self.x = random.randint(0, BoardSizeX)
         self.y = random.randint(0, BoardSizeY)
         self.color = color
@@ -39,7 +39,7 @@ class enemies:
         ge="#"
         color=ge+de+re+we
         ###
-        
+
         self.x = random.randint(0, BoardSizeX)
         self.y = random.randint(0, BoardSizeY)
         self.color = color
@@ -48,7 +48,7 @@ class enemies:
 
 
 
-        
+
 
 ################################################################################################################
 
@@ -69,7 +69,6 @@ MainScreen.create_circle =  _create_circle
 
 master.wm_title("Agar.iu")
 
-bit = bits()
 
 
 #bits
@@ -84,7 +83,7 @@ for i in range(10):
     enemy = enemies()
     enemyList.append(enemy)
 
-    
+
 
 #character vars
 x = 100
@@ -101,7 +100,7 @@ movementSpeed = 100/r + r*.01
 
 ################################################################################################################
 #Functions
-        
+
 def UpdateScreen():
     #Screen
     MainScreen.delete("all")
@@ -112,17 +111,17 @@ def UpdateScreen():
     #Draw Bits
     for i in range(0, len(bitList)):
         bit = bitList[i]
-        
+
         MainScreen.create_circle(MainScreen, bit.x, bit.y, 4, fill = bit.color, outline = "#DDD", width = 1)
-        
+
     #Draw Enemies
     for i in range(0, len(enemyList)):
         enemy = enemyList[i]
-        
+
         MainScreen.create_circle(MainScreen, enemy.x, enemy.y, enemy.r, fill = enemy.color, outline = "#DDD", width = 1)
-    
+
     MainScreen.update()
-    
+
     time.sleep(.0001)
 
 
@@ -141,17 +140,17 @@ while Alive:
                 bitList[i] = bits()
                 r += .07
                 area = 3.14 * r ** 2
-    
+
 
     #Update Enemy
-            
+
     for i in range(0, len(enemyList)):
         if enemyList[i].x <= x + r and enemyList[i].x >= x - r:
             if enemyList[i].y <= y + r and enemyList[i].y >= y - r:
-                if area > 3.14 * enemyList[i].r ** 2:
-                    area += 3.14 * enemyList[i].r ** 2
-                    r = math.sqrt(area/(3.14))
-                    enemyList[i] = enemies()
+                area += 3.14 * enemyList[i].r ** 2
+                r = math.sqrt(area/(3.14))
+                enemyList[i] = enemies()
+>>>>>>> 968e97c93ac48e9e97d0d13a947e6b2f160e5ccf
 
         enemyList[i].x += ((-1)**random.randint(0,1))*enemyList[i].movement
         enemyList[i].y += ((-1)**random.randint(0,1))*enemyList[i].movement
@@ -163,12 +162,13 @@ while Alive:
                 if bitList[j].y <= e.y + e.r and bitList[j].y >= e.y - e.r:
                     bitList[j] = bits()
                     e.r += 1
-  
+
     #movement
 
-        
+
 
     if keyboard.is_pressed('a'):
+<<<<<<< HEAD
         x -= movementSpeed 
         
     if keyboard.is_pressed('d'):
@@ -180,5 +180,18 @@ while Alive:
     if keyboard.is_pressed('w'):
         y -= movementSpeed 
         
+=======
+        x -= movementSpeed ;
+
+    if keyboard.is_pressed('d'):
+        x += movementSpeed ;
+
+    if keyboard.is_pressed('s'):
+        y += movementSpeed ;
+
+    if keyboard.is_pressed('w'):
+        y -= movementSpeed ;
+
+>>>>>>> 968e97c93ac48e9e97d0d13a947e6b2f160e5ccf
 
     UpdateScreen()
